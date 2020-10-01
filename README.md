@@ -1,3 +1,1 @@
 curiousBlog
-
-已经配置了uwsgi和nginx，从而无需手动启动django服务
