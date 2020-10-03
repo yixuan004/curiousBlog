@@ -16,7 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.views.static import serve
+from django.conf import settings
+from django.conf.urls import url
 
 urlpatterns = [
     path('', views.home, name="home"),
+    path('company-detail/', views.company, name="company-detail"),
+    path('upload/', views.upload, name="upload"),
+    url(r'media/(?P<path>.*)', serve, {'document_root':settings.MEDIA_ROOT}),
+    path('update/', views.update, name="update"),
+    path('company/', views.companyInfoAll, name="company"),
 ]
