@@ -1,1 +1,1 @@
-curiousBlog
+curiousPlatform

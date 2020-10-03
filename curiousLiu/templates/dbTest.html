@@ -3,22 +3,52 @@
 {%block content %}
 
 <body>
-    <table border="1">
-        <tr>
-            <th>id</th>
-            <th>公司名称</th>
-            <th>新闻日期</th>
-            <th>公司新闻</th>
-        </tr>
-        {% for item in li %}
-        <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.companyName }}</td>
-            <td>{{ item.time }}</td>
-            <td>{{ item.companyNews }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+        <table border="1" align="center">
+            <tr>
+                <th>databaseId</th>
+                <th>公司名称</th>
+                <th>新闻日期</th>
+                <th>公司新闻</th>
+            </tr>
+            {% for item in companyInfoObjs %}
+            <tr>
+                <td width="100">{{ item.id }}</td>
+                <td width="100">{{ item.companyName }}</td>
+                <td width="100">{{ item.time }}</td>
+                <td width="1000">{{ item.companyNews }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <nav>                
+            <ul class="pagination">
+                {% if companyInfoObjs.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="/company?page_id={{ companyInfoObjs.previous_page_number }}">&laquo;</a>
+                    </li>
+                {% endif %}
+
+                {% for page in page.page_range %}
+                    {% if page == companyInfoObjs.number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="/company?page_id={{page}}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="/company?page_id={{page}}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if companyInfoObjs.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="/company?page_id={{ companyInfoObjs.next_page_number }}">&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        
+
 </body>
 
 {% endblock %}
