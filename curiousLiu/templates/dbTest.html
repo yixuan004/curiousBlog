@@ -2,8 +2,17 @@
 
 {%block content %}
 
+<!-- 手动使用CSS控制样式 -->
+<style type="text/css">
+    .tablemargin {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+</style>
+
+
 <body>
-        <table border="1" align="center">
+        <table border="1" align="center" class="tablemargin">
             <tr>
                 <th>databaseId</th>
                 <th>公司名称</th>
@@ -20,29 +29,51 @@
             {% endfor %}
         </table>
         
-        <nav>                
-            <ul class="pagination">
+        <nav>
+            <ul class="pagination justify-content-center">
                 {% if companyInfoObjs.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="/company?page_id={{ companyInfoObjs.previous_page_number }}">&laquo;</a>
+                        <a class="page-link" href="/company?page_id={{companyInfoObjs.previous_page_number}}">&laquo;</a>
                     </li>
                 {% endif %}
-
-                {% for page in page.page_range %}
-                    {% if page == companyInfoObjs.number %}
-                        <li class="page-item active">
-                            <a class="page-link" href="/company?page_id={{page}}">{{ page }}</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="/company?page_id={{page}}">{{ page }}</a>
-                        </li>
-                    {% endif %}
+        
+                {% if left_has_more %}
+                    <li class="page-item">
+                        <a class="page-link" href="/company?page_id=1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="javascript: void(0);">...</a>
+                    </li>
+                {% endif %}
+        
+                {% for page in left_page_range %}
+                    <li class="page-item">
+                        <a class="page-link" href="/company?page_id={{page}}">{{ page }}</a>
+                    </li>
                 {% endfor %}
-
+        
+                <li class="page-item active">
+                    <a class="page-link" href="javascript: void(0);">{{ companyInfoObjs.number }}</a>
+                </li>
+        
+                {% for page in right_page_range %}
+                    <li class="page-item">
+                        <a class="page-link" href="/company?page_id={{page}}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+        
+                {% if right_has_more %}
+                    <li class="page-item">
+                        <a class="page-link" href="javascript: void(0);">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/company?page_id={{page.num_pages}}">{{ page.num_pages }}</a>
+                    </li>
+                {% endif %}
+        
                 {% if companyInfoObjs.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="/company?page_id={{ companyInfoObjs.next_page_number }}">&raquo;</a>
+                        <a class="page-link" href="/company?page_id={{companyInfoObjs.next_page_number}}">&raquo;</a>
                     </li>
                 {% endif %}
             </ul>
