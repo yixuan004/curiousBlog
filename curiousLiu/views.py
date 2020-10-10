@@ -51,7 +51,7 @@ def companyInfoAll(request):
     from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
     companyInfoObj = models.companyInfo.objects.all() # 数据库中的全部数据
-    
+    sumLen = len(companyInfoObj)
     page = Paginator(companyInfoObj, 20) # 每页展示20条数据，目前在这里写死，希望做成用户可选择的导航条，通过用户的选择展示每页5 or 10 or 20条数据
     page_id = request.GET.get('page_id')
     
