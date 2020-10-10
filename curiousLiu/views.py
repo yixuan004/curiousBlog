@@ -41,7 +41,9 @@ def update(request):
     updateText20201003 = '20201003-实现了初步的页面的搜索跳转功能；实现了初步的附件上传功能（暂未给出图形化界面，可通过postman进行请求构造）\
     目前可通过访问/media/upload/202010刘逸轩简历.pdf查看“关于我”；完成了home页面的初步排版；链接数据库可以进行数据库的查询（/company/页）；\
     实现了基础的翻页功能并对翻页样式进行了优化；在home页会随机展示3条公司-时间-新闻的对应关系并进行了排版的优化'
-    updateText = [updateText20201003]
+
+    updateText20201010 = '20201010-对/company/页进行了排版优化，并且可以展示数据库总条数；'
+    updateText = [updateText20201003, updateText20201010]
 
     return render(request, 'updateDescription.html', {'updateText':updateText})
 
@@ -55,7 +57,7 @@ def companyInfoAll(request):
     page = Paginator(companyInfoObj, 20) # 每页展示20条数据，目前在这里写死，希望做成用户可选择的导航条，通过用户的选择展示每页5 or 10 or 20条数据
     page_id = request.GET.get('page_id')
     
-    around = 5 # 设置一个定值，为翻页栏的前后5条会被显示出来
+    around = 3 # 设置一个定值，为翻页栏的前后3条会被显示出来
 
     if page_id:
         try:
