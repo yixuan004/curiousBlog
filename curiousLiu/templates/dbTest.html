@@ -5,35 +5,43 @@
 <!-- 手动使用CSS控制样式 -->
 <style type="text/css">
     .tablemargin {
-    margin-top: 20px;
     margin-bottom: 20px;
     }
 </style>
 
 
 <body>
-        <table border="1" align="center" class="tablemargin">
-            <tr>
-                <th>databaseId</th>
-                <th>公司名称</th>
-                <th>新闻日期</th>
-                <th>公司新闻</th>
-            </tr>
-            {% for item in companyInfoObjs %}
-            <tr>
-                <td width="100">{{ item.id }}</td>
-                <td width="100">{{ item.companyName }}</td>
-                <td width="100">{{ item.time }}</td>
-                <td width="1000">{{ item.companyNews }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        
+    
+    <table border="1" align="center" margin-bottom="20px" class="table">
+    <thead class="thead-light" align="center">
+        <tr>
+            <th scope="col">#databaseId</th>
+            <th scope="col">公司名称</th>
+            <th scope="col">新闻日期</th>
+            <th scope="col">公司新闻</th>
+        </tr>
+    </thead>
+    {% for item in companyInfoObjs %}
+        <tr>
+            <td width="50" align="center" valign="middle">{{ item.id }}</td>
+            <td width="250" align="center" valign="middle">{{ item.companyName }}</td>
+            <td width="200" align="center" valign="middle">{{ item.time }}</td>
+            <td width="600">{{ item.companyNews }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
         <nav>
+
             <ul class="pagination justify-content-center">
+                查询展示
+                <span class="count">
+                    (共{{companyInfoObj.}}页）           
+                </span>
+
                 {% if companyInfoObjs.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="/company?page_id={{companyInfoObjs.previous_page_number}}">&laquo;</a>
+                        <a class="page-link" href="/company?page_id={{companyInfoObjs.previous_page_number}}">上一页</a>
                     </li>
                 {% endif %}
         
@@ -73,7 +81,7 @@
         
                 {% if companyInfoObjs.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="/company?page_id={{companyInfoObjs.next_page_number}}">&raquo;</a>
+                        <a class="page-link" href="/company?page_id={{companyInfoObjs.next_page_number}}">下一页</a>
                     </li>
                 {% endif %}
             </ul>
