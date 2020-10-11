@@ -55,24 +55,27 @@ def companyInfoAll(request):
     companyInfoObj = models.companyInfo.objects.all() # 数据库中的全部数据
     sumLen = len(companyInfoObj)
     page = Paginator(companyInfoObj, 20) # 每页展示20条数据，目前在这里写死，希望做成用户可选择的导航条，通过用户的选择展示每页5 or 10 or 20条数据
-    page_id = request.GET.get('page_id')
     
-    around = 3 # 设置一个定值，为翻页栏的前后3条会被显示出来
-
-    if page_id:
-        try:
-            companyInfoObjs = page.page(page_id)
-            #current = companyInfoObjs.number  # 唯一try成功不异常，作为当前的页码
-        except PageNotAnInteger:
+    inputPageIndex = request.POST.get("inputPageIndex")
+    print("inputPageIndex",inputPageIndex)
+    try:
+        companyInfoObjs = page.page(inputPageIndex)
+    except:    
+        page_id = request.GET.get('page_id')
+        if page_id:
+            try:
+                companyInfoObjs = page.page(page_id)
+                #current = companyInfoObjs.number  # 唯一try成功不异常，作为当前的页码
+            except PageNotAnInteger:
+                companyInfoObjs = page.page(1)
+            except EmptyPage:
+                companyInfoObjs = page.page(1)
+        else:
             companyInfoObjs = page.page(1)
-        except EmptyPage:
-            companyInfoObjs = page.page(1)
-    else:
-        companyInfoObjs = page.page(1)
 
     total = page.num_pages # 总共的页码
     current = companyInfoObjs.number
-
+    around = 3 # 设置一个定值，为翻页栏的前后3条会被显示出来
     # 在后端进行处理，返回{'left_has_more': left_has_more, 'right_has_more': right_has_more, 'left_page_range': left_page_range, 'right_page_range': right_page_range }
     if current <= around + 3:
         left_has_more = False
@@ -88,6 +91,12 @@ def companyInfoAll(request):
         right_has_more = True
         right_page_range = range(current + 1, current + around + 1)
 
+
+    
     #print("locals()", locals())
+
+    # print("For a check")
+    # inputPageIndex = request.POST['inputPageIndex']
+    # print("inputPageIndex",inputPageIndex)
  
     return render(request,'dbTest.html',locals()) # locals() 函数会以字典类型返回当前位置的全部局部变量。

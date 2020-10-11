@@ -11,7 +11,8 @@
         table-layout:fixed;
     }
     .inputWidth{
-        width:40px;
+        width:50px;
+        height:40px;
     }
 
 
@@ -98,21 +99,21 @@
                 {% endif %}   
                 
 
+                <form class="form-inline my-2 my-lg-0" method="POST" action="{%url 'company' %}">
+                    <th>  
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">第</span>    
+                            </div>
 
-                <th >
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">第</span>    
-                    </div>
-        
-                    <input type="text" placeholder="1" class="inputWidth" oninput="value=value.replace(/[^\d]/g,'')">
-        
-                    <div class="input-group-append">
-                    <span class="input-group-text">页</span>
-                    </div>    
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">前往</button>
-                </div>
-                </th>
+                            <div class="input-group-append">
+                            <input type="text" placeholder="" name="inputPageIndex" aria-label="Search" class="inputWidth" oninput="value=value.replace(/[^\d]/g,'')">
+                            <span class="input-group-text">页</span>
+                            </div>    
+                            <button class="btn btn-outline-secondary" type="submit" name="goInputPageIndex" οnclick="window.location.href='/company?page_id={{page}}'">前往</button>
+                        </div>
+                    </th>
+                </form>
 
                 <td>
                 <p class="textmargin">
@@ -123,7 +124,7 @@
 
                 </tr>
                 </table>
-            </ul>
+            
             
         </nav>
 
