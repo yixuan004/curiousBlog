@@ -3,5 +3,50 @@
 {%block content %}
 
     <h1>Hello, {{inputCompanyName}}!</h1>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/company-detail_CSS1.css">
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
+    </head>
+    <body>
+     
+        <div class="my_msg_list">
+        <div class="my_msg_list_view">
+            <div class="my_msg_list_box">
+                <div class="my_msg_list_con">
+                    <div class="my_msg_list_title">
+                        <span >消息总数：</span><span>3</span>
+                        <a class="fr">清空所有消息</a>
+                        <span class="line fr"></span>
+                        <a class="fr">全部标记为已读</a>
+                    </div>
+                    <div class="msg_list"><!---->
+                        <ul class="msg_list_ul">
+                            <li class="msg_list_ul_li">
+                                <span class="msg_type ">系统</span>
+                                <span class="msg_info_box">
+                                    <span class="msg_title">测试第一个消息婚这件小事</span>
+                                </span>
+                                <div class="fr options_info options-f">
+                                    <a class="btn-rush csdnc-trash" style="float: right;">
+                                        <img src="./img/msgDelete.png">
+                                    </a>
+                                    <em class="data-time" style="float: right;padding-right:10px">2019-03-28</em>
+                                </div>
+                                <div class="msg_content ">第一个测试发送消息的内容</div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+     
+                    <div class="page-box">
+     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
 
 {% endblock %}
